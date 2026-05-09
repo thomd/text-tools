@@ -81,6 +81,7 @@ def main():
     )
     parser.add_argument("-t", "--text", help="Input text (default: read from stdin)")
     parser.add_argument("-i", action="store_true", help="Lowercase output")
+    parser.add_argument("-u", action="store_true", help="Output unique words, one per line")
     args = parser.parse_args()
 
     if args.text:
@@ -92,7 +93,12 @@ def main():
         sys.exit(1)
 
     result = process(raw)
-    print(result.lower() if args.i else result)
+    if args.i:
+        result = result.lower()
+    if args.u:
+        words = sorted(set(result.split()))
+        result = "\n".join(words)
+    print(result)
 
 
 if __name__ == "__main__":

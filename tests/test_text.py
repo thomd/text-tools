@@ -106,3 +106,28 @@ def test_cli_i_flag_pipe_lowercases_output():
     assert proc.returncode == 0
     assert "hello" in proc.stdout and "world" in proc.stdout
     assert "Hello" not in proc.stdout
+
+def test_cli_u_flag_outputs_one_word_per_line():
+    proc = subprocess.run(
+        [sys.executable, "-m", "text_tools.cli", "-u", "-t", "one two three"],
+        capture_output=True, text=True,
+    )
+    assert proc.returncode == 0
+    assert proc.stdout.strip().splitlines() == ["one", "three", "two"]
+
+def test_cli_u_flag_deduplicates():
+    proc = subprocess.run(
+        [sys.executable, "-m", "text_tools.cli", "-u", "-t", "the cat sat on the mat"],
+        capture_output=True, text=True,
+    )
+    assert proc.returncode == 0
+    lines = proc.stdout.strip().splitlines()
+    assert len(lines) == len(set(lines))
+
+def test_cli_u_and_i_flags_combined():
+    proc = subprocess.run(
+        [sys.executable, "-m", "text_tools.cli", "-u", "-i", "-t", "Hello hello HELLO"],
+        capture_output=True, text=True,
+    )
+    assert proc.returncode == 0
+    assert proc.stdout.strip().splitlines() == ["hello"]
