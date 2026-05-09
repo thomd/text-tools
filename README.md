@@ -6,13 +6,13 @@ Strips HTML, Markdown, and punctuation from text, leaving only plain words and n
 
 ### Requirements
 
-- Python ≥ 3.12
+- Python ≥ 3.13
 - [uv](https://docs.astral.sh/uv/)
 
 ### Install
 
 ```bash
-uv tool install /path/to/text-tools
+uv tool install --python 3.13 /path/to/text-tools
 ```
 
 ### Usage
