@@ -4,17 +4,19 @@
 
 Strips HTML, Markdown, and punctuation from text, leaving only plain words and numbers. Uses NLTK for tokenization.
 
-### Requirements
-
-- Python ≥ 3.13
-- [uv](https://docs.astral.sh/uv/)
-
 ### Install
 
 ```bash
 git clone https://github.com/thomd/text-tools
 cd text-tools
 uv tool install --python 3.13 .
+```
+
+### Update
+
+```bash
+git pull
+uv tool upgrade text-tools
 ```
 
 ### Usage

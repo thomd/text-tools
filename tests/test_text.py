@@ -89,3 +89,20 @@ def test_cli_t_flag():
     )
     assert proc.returncode == 0
     assert "Hello" in proc.stdout and "world" in proc.stdout
+
+def test_cli_i_flag_lowercases_output():
+    proc = subprocess.run(
+        [sys.executable, "-m", "text_tools.cli", "-i", "-t", "Hello World"],
+        capture_output=True, text=True,
+    )
+    assert proc.returncode == 0
+    assert "hello world" in proc.stdout
+
+def test_cli_i_flag_pipe_lowercases_output():
+    proc = subprocess.run(
+        [sys.executable, "-m", "text_tools.cli", "-i"],
+        input="Hello, World!", capture_output=True, text=True,
+    )
+    assert proc.returncode == 0
+    assert "hello" in proc.stdout and "world" in proc.stdout
+    assert "Hello" not in proc.stdout

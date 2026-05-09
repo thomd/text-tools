@@ -80,6 +80,7 @@ def main():
         description="Strip HTML, Markdown, and punctuation — output plain text only."
     )
     parser.add_argument("-t", "--text", help="Input text (default: read from stdin)")
+    parser.add_argument("-i", action="store_true", help="Lowercase output")
     args = parser.parse_args()
 
     if args.text:
@@ -90,7 +91,8 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    print(process(raw))
+    result = process(raw)
+    print(result.lower() if args.i else result)
 
 
 if __name__ == "__main__":
