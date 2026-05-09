@@ -12,7 +12,9 @@ Strips HTML, Markdown, and punctuation from text, leaving only plain words and n
 ### Install
 
 ```bash
-uv tool install --python 3.13 /path/to/text-tools
+git clone https://github.com/thomd/text-tools
+cd text-tools
+uv tool install --python 3.13 .
 ```
 
 ### Usage
